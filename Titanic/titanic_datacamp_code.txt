@@ -1,0 +1,52 @@
+#Now lets see by grouping function for both class, title sex:
+def process_age():
+    # Create a groupby object: by_sex_class
+    by_sex_class = featureEngData.groupby(['sex','pclass','title'])
+    # Write a function that imputes median
+    def impute_median(series):
+        return series.fillna(series.median())
+    
+    # Impute age and assign to titanic.age
+    featureEngData.age = by_sex_class.age.transform(impute_median)
+    return featureEngData
+print(featureEngData.age.count()
+=====================================================
+def c_deck_survival(gr):
+    c_passengers = gr['cabin'].str.startswith('C').fillna(False)
+    return gr.loc[c_passengers, 'survived'].mean()
+
+# Create a groupby object using titanic over the 'sex' 
+column: by_sex
+by_sex = titanic.groupby('sex')
+# Call by_sex.apply with the function c_deck_survival
+
+c_surv_by_sex = by_sex.apply(c_deck_survival)
+
+
+# Print the survival rates
+
+print(c_surv_by_sex)
+==============
+# Create the Boolean Series: under10
+
+under10 = (titanic['age']<10).map({True:'under 10', False:'over 10'})
+
+
+# Group by under10 and compute the survival rate
+
+survived_mean_1 = titanic.groupby(under10)['survived'].mean()
+print(survived_mean_1)
+
+
+# Group by under10 and pclass and compute the survival rate
+
+survived_mean_2 = titanic.groupby([under10, 'pclass')['survived'].mean()
+
+print(survived_mean_2)
+==================
+RFM (Recency, Frequency, Monetary) analysis
+RFM criterion is one of the oldest and most widely used technique for selecting the most significant customers. It supports the selection of customers that are most recent (R), frequent (F), and add a larger monetary value (M) in every transaction.
+
+· Recency (R): Recency is the most important predictor of who is more likely to respond to an offer. Customers who have purchased recently are more likely to purchase again when compared to those who did not purchase recently.
+· Frequency (F): The second most important factor is how frequently these customers purchase. The higher the frequency, the higher is the chances of these responding to the offers.
+· Monetary Value (M): The third factor is the amount of money these customers have spent on purchases. Customers who have spent higher contribute more value to the business as compared to those who have spent less.
